@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--layout 태그 추가-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="calendarViewModel"
+            type="org.kmebin.androidpractices.CalendarViewModel">
+        </variable>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="30dp">
+
+        <!--헤더-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/tv_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2020. 12"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:includeFontPadding="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageButton
+                android:id="@+id/btn_last_month"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="6dp"
+                android:src="@drawable/ic_calendar_picker"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_month"
+                app:layout_constraintBottom_toBottomOf="@id/tv_month"/>
+
+            <ImageButton
+                android:id="@+id/btn_next_month"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginEnd="6dp"
+                android:src="@drawable/ic_calendar_picker"
+                android:rotation="180"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_month"
+                app:layout_constraintBottom_toBottomOf="@id/tv_month"/>
+
+            <ImageButton
+                android:id="@+id/btn_month_picker"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="6dp"
+                android:src="@drawable/ic_calendar_picker"
+                android:rotation="270"
+                app:layout_constraintStart_toEndOf="@id/tv_month"
+                app:layout_constraintTop_toTopOf="@id/tv_month"
+                app:layout_constraintBottom_toBottomOf="@id/tv_month"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/v_calendar_header"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="15dp"
+            android:background="#9F9F9F"
+            app:layout_constraintEnd_toEndOf="@id/cl_header"
+            app:layout_constraintStart_toStartOf="@id/cl_header"
+            app:layout_constraintTop_toBottomOf="@id/cl_header" />
+
+        <!--요일-->
+        <LinearLayout
+            android:id="@+id/ll_day_of_week"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="45dp"
+            android:weightSum="7"
+            app:layout_constraintTop_toBottomOf="@id/cl_header"
+            app:layout_constraintStart_toStartOf="@id/cl_header"
+            app:layout_constraintEnd_toEndOf="@id/cl_header">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="월"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="화"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="수"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="목"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="금"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="토"
+                android:textColor="@color/blue"
+                android:textSize="13sp"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="일"
+                android:textColor="@color/red"
+                android:textSize="13sp"
+                android:includeFontPadding="false"/>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_calendar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="45dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="7"
+            app:layout_constraintTop_toBottomOf="@id/ll_day_of_week"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/ll_day_of_week"
+            app:layout_constraintEnd_toEndOf="@id/ll_day_of_week"
+            tools:listitem="@layout/item_calendar_day"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
