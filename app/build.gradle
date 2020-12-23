@@ -24,10 +24,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    // xml의 id를 바로 클래스에서 사용할 수 있게 함
-    buildFeatures {
-        dataBinding = true
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -47,8 +43,4 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    // LifeCycles
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    // Activity-ktx
-    implementation "androidx.activity:activity-ktx:1.1.0"
 }

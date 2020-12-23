@@ -2,25 +2,40 @@ package org.kmebin.androidpractices
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
-import org.kmebin.androidpractices.databinding.ActivityCalendarBinding
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.android.synthetic.main.activity_calendar.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CalendarActivity : AppCompatActivity() {
-
-	private val calendarViewModel : CalendarViewModel by viewModels()
+	private lateinit var calendarAdapter: CalendarAdapter
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		setContentView(R.layout.activity_calendar)
 
-		// DataBinding 사용
-		// -> UI 컴포넌트마다 각각 findViewById를 선언해 주지 않아도 됨
-		// 1. bulid.gradle에 dataBinding 선언
-		// 2. layout.xml 최상위 루트에 <layout> 태그 추가
-		// 3. setContentView(R.layout.activity_main)
-		// 	  -> DataBindingUtil.setContentView(this, R.layout.activity_main)으로 변경
-		val binding : ActivityCalendarBinding = DataBindingUtil.setContentView(this, R.layout.activity_calendar)
-		binding.calendarViewModel = calendarViewModel
-		binding.lifecycleOwner= this
+		calendarAdapter = CalendarAdapter(this)
+
+		rv_calendar.adapter = calendarAdapter
+		rv_calendar.layoutManager = GridLayoutManager(this, CalendarView.DAYS_OF_WEEK)
+		rv_calendar.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
+		rv_calendar.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+		// 이전 달로 이동 버튼 세팅
+		btn_last_month.setOnClickListener {
+			calendarAdapter.lastMonth()
+		}
+
+		// 다음 달로 이동 버튼 세팅
+		btn_next_month.setOnClickListener {
+			calendarAdapter.nextMonth()
+		}
+	}
+
+	// 현재 달력 새로 고침
+	fun refreshThisMonth(calendar: Calendar) {
+		val dateFormat = SimpleDateFormat("yyyy. MM", Locale.KOREAN)
+		tv_header.text = dateFormat.format(calendar.time)
 	}
 }
