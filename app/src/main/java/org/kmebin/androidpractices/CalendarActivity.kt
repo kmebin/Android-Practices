@@ -19,8 +19,10 @@ class CalendarActivity : AppCompatActivity() {
 
 		rv_calendar.adapter = calendarAdapter
 		rv_calendar.layoutManager = GridLayoutManager(this, CalendarView.DAYS_OF_WEEK)
-		rv_calendar.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
-		rv_calendar.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+		// 가로선 추가
+		val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+		dividerItemDecoration.setDrawable(this.resources.getDrawable(R.drawable.calendar_divider))
+		rv_calendar.addItemDecoration(dividerItemDecoration)
 
 		// 이전 달로 이동 버튼 세팅
 		btn_last_month.setOnClickListener {
