@@ -9,11 +9,6 @@ import java.util.*
 class CalendarAdapter(private val calendarActivity: CalendarActivity) : RecyclerView.Adapter<CalendarViewHolder>() {
     private val calendarView = CalendarView()
 
-    companion object {
-        const val DAYS_OF_WEEK = 7
-        const val WEEKS_OF_MONTH = 5
-    }
-
     init {
         calendarView.initCalendar {
             refreshView(it)
@@ -26,15 +21,15 @@ class CalendarAdapter(private val calendarActivity: CalendarActivity) : Recycler
     }
 
     override fun getItemCount(): Int {
-        return DAYS_OF_WEEK * WEEKS_OF_MONTH
+        return CalendarView.DAYS_OF_WEEK * CalendarView.WEEKS_OF_MONTH
     }
 
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
         when {
             // 일요일 빨간색으로 설정
-            position % DAYS_OF_WEEK == 0 -> holder.date.setTextColor(Color.RED)
+            position % CalendarView.DAYS_OF_WEEK == 0 -> holder.date.setTextColor(Color.RED)
             // 토요일 파란색으로 설정
-            position % DAYS_OF_WEEK == 6 -> holder.date.setTextColor(Color.BLUE)
+            position % CalendarView.DAYS_OF_WEEK == 6 -> holder.date.setTextColor(Color.BLUE)
             // 나머지 검은색으로 설정
             else -> holder.date.setTextColor(Color.BLACK)
         }

@@ -1,11 +1,12 @@
 package org.kmebin.androidpractices
 
+import android.util.Log
 import java.util.*
 
 class CalendarView {
     companion object {
         const val DAYS_OF_WEEK = 7
-        const val WEEKS_OF_MONTH = 5
+        var WEEKS_OF_MONTH = 5
     }
 
     private val calendar = Calendar.getInstance()
@@ -50,13 +51,19 @@ class CalendarView {
 
         // 기준 날 설정
         calendar.set(Calendar.DATE, 1)
-        // 해당 달의 말일
+        // 이번 달 1일의 요일
+        val thisMonthFirstIndex = calendar.get(Calendar.DAY_OF_WEEK)
+        // 이번 달의 말일
         thisMonthMaxDate = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         // 지난 달 말일의 요일 (일요일 1, 토요일 7)
         lastMonthEndIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1
 
         lastMonthEnd(calendar.clone() as Calendar) // 캘린더 객체 복제
         thisMonthDate(calendar)
+
+        // 이번 달 1일의 요일이 금요일 or 토요일인 경우 6주가 됨
+        WEEKS_OF_MONTH = if (thisMonthFirstIndex == 6 || thisMonthFirstIndex == 7) 6
+        else 5
 
         // 다음 달 1일의 요일
         nextMonthFirstIndex = DAYS_OF_WEEK * WEEKS_OF_MONTH - (lastMonthEndIndex+thisMonthMaxDate)
