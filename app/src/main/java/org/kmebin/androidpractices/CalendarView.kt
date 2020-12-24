@@ -54,11 +54,12 @@ class CalendarView {
         thisMonthMaxDate = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         // 지난 달 말일의 요일 (일요일 1, 토요일 7)
         lastMonthEndIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1
+
+        lastMonthEnd(calendar.clone() as Calendar) // 캘린더 객체 복제
+        thisMonthDate(calendar)
+
         // 다음 달 1일의 요일
         nextMonthFirstIndex = DAYS_OF_WEEK * WEEKS_OF_MONTH - (lastMonthEndIndex+thisMonthMaxDate)
-
-        thisMonthDate(calendar)
-        lastMonthEnd(calendar.clone() as Calendar) // 캘린더 객체 복제
         nextMonthFirst()
 
         refreshCallback(calendar)

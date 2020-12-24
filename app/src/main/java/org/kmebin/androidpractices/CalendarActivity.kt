@@ -1,7 +1,9 @@
 package org.kmebin.androidpractices
 
+import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_calendar.*
@@ -19,6 +21,7 @@ class CalendarActivity : AppCompatActivity() {
 
 		rv_calendar.adapter = calendarAdapter
 		rv_calendar.layoutManager = GridLayoutManager(this, CalendarView.DAYS_OF_WEEK)
+
 		// 가로선 추가
 		val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
 		dividerItemDecoration.setDrawable(this.resources.getDrawable(R.drawable.calendar_divider))
