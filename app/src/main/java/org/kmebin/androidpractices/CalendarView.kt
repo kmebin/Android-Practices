@@ -9,6 +9,7 @@ class CalendarView {
         var WEEKS_OF_MONTH = 5
     }
 
+    // 오늘에 해당하는 캘린더를 가져옴
     private val calendar = Calendar.getInstance()
     init {
         calendar.time = Date()

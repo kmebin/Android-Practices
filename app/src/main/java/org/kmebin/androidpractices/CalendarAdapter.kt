@@ -30,13 +30,13 @@ class CalendarAdapter(private val calendarActivity: CalendarActivity) : Recycler
             position % CalendarView.DAYS_OF_WEEK == 0 -> holder.date.setTextColor(Color.RED)
             // 토요일 파란색으로 설정
             position % CalendarView.DAYS_OF_WEEK == 6 -> holder.date.setTextColor(Color.BLUE)
-            // 나머지 검은색으로 설정
             else -> holder.date.setTextColor(Color.BLACK)
         }
 
         // 현재 달력에서 지난 달, 다음 달은 투명하게 설정
         if (position < calendarView.lastMonthEndIndex || position >= calendarView.lastMonthEndIndex+calendarView.thisMonthMaxDate)
-            holder.date.setTextColor(Color.parseColor("#4D000000"))
+            holder.date.alpha = 0.3f
+        else holder.date.alpha = 1f
 
         holder.date.text = calendarView.calendarData[position].toString()
     }
