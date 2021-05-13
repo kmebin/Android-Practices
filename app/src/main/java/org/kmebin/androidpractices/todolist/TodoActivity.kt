@@ -1,5 +1,6 @@
 package org.kmebin.androidpractices.todolist
 
+import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,14 +19,39 @@ class TodoActivity : AppCompatActivity() {
         binding = ActivityTodoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        todoAdapter = TodoAdapter()
+        todoAdapter =
+            TodoAdapter(onClickDeleteImage = { deleteTodo(it) }, onClickItem = { toggleTodo(it) })
         binding.todoList.adapter = todoAdapter
+
+        binding.addButton.setOnClickListener {
+            addTodo()
+        }
+    }
+
+    private fun addTodo() {
+        val todo = binding.todoEditText.text.toString()
+        todoAdapter.todoList.add(TodoData(todo))
+        todoAdapter.notifyDataSetChanged()
+    }
+
+    private fun deleteTodo(todo: TodoData) {
+        todoAdapter.todoList.remove(todo)
+        todoAdapter.notifyDataSetChanged()
+    }
+
+    private fun toggleTodo(todo: TodoData) {
+        todo.isDone = !todo.isDone
+        todoAdapter.notifyDataSetChanged()
     }
 }
 
-data class TodoData(val text: String, var isDone: Boolean)
+data class TodoData(val text: String, var isDone: Boolean = false)
 
-class TodoAdapter() : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
+class TodoAdapter(
+    private val onClickDeleteImage: (TodoData) -> Unit,
+    private val onClickItem: (TodoData) -> Unit
+) :
+    RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
     val todoList = mutableListOf<TodoData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
@@ -36,10 +62,21 @@ class TodoAdapter() : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
     override fun getItemCount(): Int = todoList.size
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        holder.onBind(todoList[position])
+        val todo = todoList[position]
+        holder.onBind(todo)
+
+        holder.binding.todoText.apply {
+            paintFlags = if (todo.isDone) paintFlags or Paint.STRIKE_THRU_TEXT_FLAG else 0
+        }
+        holder.binding.deleteImage.setOnClickListener {
+            onClickDeleteImage(todo)
+        }
+        holder.binding.root.setOnClickListener {
+            onClickItem(todo)
+        }
     }
 
-    class TodoViewHolder(private val binding: ItemTodoBinding) :
+    class TodoViewHolder(val binding: ItemTodoBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(todoData: TodoData) {
             binding.todoText.text = todoData.text
