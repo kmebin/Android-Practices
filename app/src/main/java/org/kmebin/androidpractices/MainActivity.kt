@@ -2,20 +2,20 @@ package org.kmebin.androidpractices
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import org.kmebin.androidpractices.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val repository = UserRepository(UserApi())
-        GlobalScope.launch(Dispatchers.Main) {
-            val user = repository.getUser(2)
-            Toast.makeText(this@MainActivity, user.toString(), Toast.LENGTH_LONG).show()
-        }
+        val userFragment = UserFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.add(R.id.fragment_container, userFragment)
+        transaction.commit()
     }
 }
