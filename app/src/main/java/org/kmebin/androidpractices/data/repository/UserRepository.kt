@@ -1,4 +1,6 @@
-package org.kmebin.androidpractices
+package org.kmebin.androidpractices.data.repository
+
+import org.kmebin.androidpractices.data.api.UserApi
 
 class UserRepository(
     private val api: UserApi

@@ -1,4 +1,4 @@
-package org.kmebin.androidpractices
+package org.kmebin.androidpractices.data.model
 
 data class Support(
     val text: String,

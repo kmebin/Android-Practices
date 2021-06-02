@@ -1,9 +1,12 @@
-package org.kmebin.androidpractices
+package org.kmebin.androidpractices.ui.user
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.Job
+import org.kmebin.androidpractices.Coroutines
+import org.kmebin.androidpractices.data.model.Data
+import org.kmebin.androidpractices.data.repository.UserRepository
 
 class UserViewModel(
     private val repository: UserRepository

@@ -1,5 +1,6 @@
-package org.kmebin.androidpractices
+package org.kmebin.androidpractices.data.api
 
+import org.kmebin.androidpractices.data.model.UserResponse
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

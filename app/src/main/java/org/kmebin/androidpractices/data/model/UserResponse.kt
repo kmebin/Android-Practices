@@ -1,4 +1,4 @@
-package org.kmebin.androidpractices
+package org.kmebin.androidpractices.data.model
 
 data class UserResponse(
     val `data`: List<Data>,

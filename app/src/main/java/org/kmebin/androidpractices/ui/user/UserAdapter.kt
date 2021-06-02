@@ -1,9 +1,11 @@
-package org.kmebin.androidpractices
+package org.kmebin.androidpractices.ui.user
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import org.kmebin.androidpractices.R
+import org.kmebin.androidpractices.data.model.Data
 import org.kmebin.androidpractices.databinding.ItemUserBinding
 
 class UserAdapter(

@@ -7,7 +7,7 @@
 
         <variable
             name="user"
-            type="org.kmebin.androidpractices.Data" />
+            type="org.kmebin.androidpractices.data.model.Data" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,6 +49,16 @@
             app:layout_constraintLeft_toLeftOf="@id/first_name"
             app:layout_constraintTop_toBottomOf="@id/first_name"
             tools:text="last" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:imageUrl="@{user.avatar}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_launcher_background" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

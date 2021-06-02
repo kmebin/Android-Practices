@@ -1,8 +1,10 @@
-package org.kmebin.androidpractices
+package org.kmebin.androidpractices.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import org.kmebin.androidpractices.R
 import org.kmebin.androidpractices.databinding.ActivityMainBinding
+import org.kmebin.androidpractices.ui.user.UserFragment
 
 class MainActivity : AppCompatActivity() {
 
